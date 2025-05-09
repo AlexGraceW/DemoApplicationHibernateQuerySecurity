@@ -1,0 +1,122 @@
+{
+  "info": {
+    "name": "SecureController Test Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "username",
+              "value": "reader"
+            },
+            {
+              "key": "password",
+              "value": "1234"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "login"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Read Only (Secured)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/secure/read-only",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "secure",
+            "read-only"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Write Only (RolesAllowed)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/secure/write-only",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "secure",
+            "write-only"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Write or Delete (PreAuthorize)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/secure/write-or-delete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "secure",
+            "write-or-delete"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Username Match (PreAuthorize)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/secure/user-match?username=writer",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "secure",
+            "user-match"
+          ],
+          "query": [
+            {
+              "key": "username",
+              "value": "writer"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

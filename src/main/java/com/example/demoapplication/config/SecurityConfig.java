@@ -2,6 +2,7 @@ package com.example.demoapplication.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -11,6 +12,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
+
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+
 public class SecurityConfig {
 
     @Bean
@@ -30,15 +34,27 @@ public class SecurityConfig {
 
         return http.build();
     }
-
+    
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("admin")
+        UserDetails user1 = User.withUsername("reader")
                 .password("1234")
-                .roles("USER")
+                .roles("READ")
                 .build();
-        return new InMemoryUserDetailsManager(user);
+
+        UserDetails user2 = User.withUsername("writer")
+                .password("1234")
+                .roles("WRITE")
+                .build();
+
+        UserDetails user3 = User.withUsername("deleter")
+                .password("1234")
+                .roles("DELETE")
+                .build();
+
+        return new InMemoryUserDetailsManager(user1, user2, user3);
     }
+    
 
     @Bean
     public static org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
